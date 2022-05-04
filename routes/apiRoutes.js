@@ -25,3 +25,12 @@ router.post("/notes", function (req, res) {
         .then(notes => res.json(notes))
         .catch(err => res.status(500).json(err))
 });
+
+router.delete("/notes/:title", function (req, res) {
+    store
+        .deleteNotes(req.params.title)
+        .then(() => res.json({ ok: true }))
+        .catch(err => res.status(500).json(err))
+});
+
+module.exports = router;
