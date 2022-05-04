@@ -25,5 +25,33 @@ class Store {
             return parsedNotes;
         });
     };
-    
+    addNote(newNote) {
+        console.log(newNote);
+        return this.getNotes().then(notes => {
+            const newNoteList = [...notes, newNote]; // Creates a new array with the memebers of the array notes and adds newNote to the end
+            console.log(newNoteList);
+            return this.write(newNoteList);
+        })
+    };
+    deleteNotes(title) {
+        // use the filter function
+        return this.getNotes()
+            .then(notes => {
+                console.log("This note says " + title);
+                for (var i = 0; i < notes.length; i++) {
+                    if (notes[i].title === title) {
+                        // Splice takes i position, and then deletes the 1 note.
+                        notes.splice(i, 1);
+                        console.log(notes);
+                        break;
+                    }
+                }
+                this.write(notes);
+
+            })
+    }
 };
+
+const store = new Store();
+
+module.exports = store;
