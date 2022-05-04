@@ -5,7 +5,7 @@ const router = require("express").Router();
 //code below is for when a user visits a page 
 
 router.get("notes/", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
 
 });
 
