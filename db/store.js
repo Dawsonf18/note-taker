@@ -3,6 +3,7 @@ const path = require("path");
 const util = require("util");
 const express = require("express");
 const app = express();
+const uniqid = require('uniqid');
 
 // Creates a promise that the program will complete before continuing. 
 const readFileAsync = util.promisify(fs.readFile);
@@ -27,10 +28,13 @@ class Store {
     };
     addNote(newNote) {
         console.log(newNote);
+        newNote.id = uniqid()
+        console.log(newNote)
         return this.getNotes().then(notes => {
             const newNoteList = [...notes, newNote]; // Creates a new array with the memebers of the array notes and adds newNote to the end
             console.log(newNoteList);
             return this.write(newNoteList);
+        
         })
     };
     deleteNotes(title) {
